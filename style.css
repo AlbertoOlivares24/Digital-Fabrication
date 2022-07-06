@@ -80,7 +80,39 @@ nav a:hover::before{
     padding-right: 20px;
     font-size: 14px;
     opacity: 70%;
-
 }    
-
-
+.content h2{
+    font-size: 20px;
+    font-weight: 100;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    color: #D3D3D3;
+}
+.center {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+}
+.about_text h1{
+    font-size: 70px;
+    font-weight: 100;
+    color: #D3D3D3;
+    position: absolute;
+    transform: translate(160%, 140%)
+}
+.about_text h2{
+    font-size: 30px;
+    font-weight: 100;
+    color: #D3D3D3;
+    position: absolute;
+    transform: translate(185%, 550%)
+}
+.about_text p{
+    font-size: 20px;
+    color: #D3D3D3;
+    position: absolute;
+    transform: translate(85%, 220%)
+}
