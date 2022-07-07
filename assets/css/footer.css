@@ -1,0 +1,28 @@
+.footer{
+    transform: rotate(-90deg);
+    position: fixed;
+    left: -40px;
+    bottom: 120px;
+}
+.footer a{
+    text-decoration: none;
+    color:#D3D3D3;
+    padding-right: 20px;
+    font-size: 14px;
+    opacity: 70%;
+}    
+.content h2{
+    font-size: 20px;
+    font-weight: 100;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    color: #D3D3D3;
+}
+.center {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+}
