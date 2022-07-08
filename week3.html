@@ -17,42 +17,49 @@
                     <li><a href="./index.html">Home</a></li>
                     <li><a href="./about.html">About Me</a></li>
                     <li><a href="./projects.html">Weekly Projects</a></li>
-                    <li><a href="">Final Project</a></li>
+                    <li><a href="./finalproject.html">Final Project</a></li>
                 </ul>
             </nav>
         </div>
-<h1 style = "color:aliceblue">Week 2: Electronics and Tools</h1>
-
+      </br>
+    </br>
+  </br>
+</br>
+<h1 style = "color:aliceblue">Week 3: Microcontroller Programming</h1>
+</br>
+</br>
+</br>
+</br>
 <p>Week 3 began extremely fast paced, as soon as I was able to go back to the lab I got back to work</p>
 <p>I had found a new rope to use which wasnt elastic and was able to be wrapped around objects. This brought about the question, what do I wrap it around?</p>
 <p>This was quickly answered, and I decided to use a extended metal bearing. However, the new issue was geting it onto the motor, a task which can be done by simply sanding it down until it fits</p>
-<img src = "./assets/img/motor_before" width = 600 height = 300 >
-<img src = "./assets/img/motor_after" width = 600 height = 300 >
+<img src = "./assets/img/motor_before" width = 35% height = 40% >
+<img src = "./assets/img/motor_after" width = 35% height = 40% >
 <p>This before and after shows the difference after sanding, which allowed me to fit the bearing in:</p>
-<img src="./assets/img/motor_after3" width = 600 height = 300 >
+<img src="./assets/img/motor_after3" width = 35% height = 40% >
 <p>As seen above the next step was to simply attach the motor and the elevator lift</p>
 <p>But you cant just have a floating motor, so I created an extremely simple wooden block to give the motor space to spin</p>
-<img src = "./assets/img/motor_attached" width = 600 height = 300 >
+<img src = "./assets/img/motor_attached" width = 35% height = 40% >
 <p>In the end, I finally got the elevator to work despite all the troubles of last week</p>
-<img src = "./assets/img/elevator_working_1.gif" width = 700 height = 400 >
+<img src = "./assets/img/elevator_working_1.gif" width = 50% height = 60% >
 <p>This wasnt good enough for me though, I wanted the elevator to work well, be stable, and eventually program it to go up and down with the push of a button</p>
-<img src = "./assets/img/elevator_counterweight" width = 600 height = 300 >
+<img src = "./assets/img/elevator_counterweight" width = 35% height = 40% >
 <p>My first idea to try and balance the elevator out was to give it a counterweight, as I noticed it was a bit front heavy I placed the small piece of wood in the back</p>
 <p>Addionally, if you look carefully at the image above I added a small piece of wood to make the elevator hit the walls of the shaft, in order to create friction for stabilization</p>
-<img src = "./assets/img/elevator_pulley" width = 600 height = 300 >
+<img src = "./assets/img/elevator_pulley" width = 35% height = 40% >
 <p>Eventually I even found that we had long extending bearings which I glued together in order for the rope to stay in place at the middle</p>
 <p>This further helped to stabalize the elevator as it went up, but something still wasnt right</p>
-<img src = "./assets/img/elevator_cut" width = 600 height = 300 >
-<img src = "./assets/img/elevator_sanded" width = 600 height = 300 >
+<img src = "./assets/img/elevator_cut" width = 35% height = 40% >
+<img src = "./assets/img/elevator_sanded" width = 35% height = 40% >
 <p>I decided that I needed to cut the elevator so that it wouldnt hit the walls of the shaft as it was getting stuck so I cut and sanded it down</p>
 <p>Despite this, my biggest breakthrough came from a suggestion from my teacher, who suggested using low friction rods to help stabalize the lift</p>
-<img src = "./assets/img/elevator_rods" width = 600 height = 300 >
-<img src = "./assets/img/elevator_rods2" width = 600 height = 300 >
-<img src = "./assets/img/elevator_rods3" width = 600 height = 300 >
+<img src = "./assets/img/elevator_rods" width = 35% height = 40% >
+<img src = "./assets/img/elevator_rods2" width = 35% height = 40% >
+<img src = "./assets/img/elevator_rods3" width = 35% height = 40% >
 <p>How it works is that I added a top to the elevator shaft, drilled 4 holes into the lift, and to the foundation of the elevator so that they could stay in place </p>
 <p>To add on, I decided to experiment with more complex arduino code and how it would work with my elevator and eventually make my own.</p>
 <p>Luckily, my professor, Nathan Melenbrink had given a lecture on arduino code and had the perfect code for me to experiment the elevator and arduino coding</p>
-<p>Thanks professor, links to his github are <a href="https://github.com/nathanmelenbrink" target="_blank">here</a></p> 
+<p>Thanks professor, <a href="https://github.com/nathanmelenbrink" target="_blank">links to his github are here</a></p> 
 <pre style = 'background-color:white;color:black'>
     const int A1A = 3;  // define pin 3 for A-1A (speed)
     const int A1B = 4;  // define pin 4 for A-1B (direction)
@@ -88,7 +95,7 @@
     }
 </pre>
 <p>In the end, the result was this:</p>
-<img src = "./assets/img/elevator_working2.gif" width = 700 height = 400 >
+<img src = "./assets/img/elevator_working2.gif" width = 40% height = 60% >
 <p>Now I was finally close to finishing, the last things that had to be done was increase the stability even more and program the elevator to work off a button to ascend and descend</p>
 <p>The stability part wasnt a big issue, i cut the corners of the lift in order to give it more space so that it wouldnt hit the shaft as friction was no longer a problem, making the lift look like this</p>
 <img src = "./assets/img/elevator_lift_fixed.PNG" width = 600 height = 300>
@@ -97,8 +104,8 @@
 <p>Sadly, this was too challenging and the idea of using two buttons instead came up in conversation, which helped simplify the procecss</p>
 <p>However, even with this newfound idea the arduino was having some issues, a single pin had been messing up the entire program, as it was plugged into pin 1, which lead to issues with compatibility</p>
 <p>Eventually, when we changed the pin value to 7 the program fixed itself, and finally all was well</p>
-<img src = "./assets/img/elevator_final.gif" width = 700 height = 400>
-<p>All in all, I was pretty happy with how it came out in the end, id also like to extend my gratitude to Mustafa Omran, who helped me writing the intial arduino code his github is <a href="https://github.com/momran24" target="_blank">here</a> as well my TA who is <a href="https://github.com/SuvinSundararajan" target="_blank">here</a></p>
+<img src = "./assets/img/elevator_final.gif" width = 45% height = 60%>
+<p>All in all, I was pretty happy with how it came out in the end, id also like to extend my gratitude to Mustafa Omran, who helped me writing the intial arduino code <a href="https://github.com/momran24" target="_blank">his github is here</a> as well my  <a href="https://github.com/SuvinSundararajan" target="_blank">TA who is here</a></p>
 <p>Lastly, what follows is the final arduino code as well as the curcuitry which made this all possible</p>
 <pre style = 'background-color:white;color:black'>
     const int A1A = 3;  
@@ -148,7 +155,7 @@
     
     }
 </pre>
-<img src = "./assets/img/circuitry.PNG" width = 400 height = 200>
+<img src = "./assets/img/circuitry.PNG" width = 35% height = 50%>
 
 </div>
 </div>

@@ -9,7 +9,7 @@ html, body {
     height: 100%;
 }
 p{
-    font-size: 18px;
+    font-size: 25px;
     color:aliceblue
 }
 
@@ -133,8 +133,12 @@ p{
     color: #D3D3D3;
 }
 .profile-desc-about{
-    font-size:20px;
+    font-size:28px;
     color:#D3D3D3;
     height: 100px;
     transform: translate(0%, -120%)
+}
+a {
+    color: red;
+    font-weight: 100px;
 }
