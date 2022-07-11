@@ -121,6 +121,7 @@ p{
 .profile-picture > img {
     width: 90%;
     height: 60%;
+    border-radius: 10px;
 }
 .profile-desc-title{
     color:#D3D3D3;
