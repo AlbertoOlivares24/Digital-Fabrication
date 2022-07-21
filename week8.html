@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHYS-S12</title>
+    <link rel = "stylesheet" href = "./assets/css/footer.css">
+    <link rel = "stylesheet" href = "./assets/css/navbar.css">
+    <link rel = "stylesheet" href = "./assets/css/styles.css">
+</head>
+<body>
+    <div class="root">
+        <div class="bg-cheat">
+            <img src="./assets/img/background_black.jpg">
+        </div>
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About Me</a></li>
+                    <li><a href="./projects.html">Weekly Projects</a></li>
+                    <li><a href="./finalproject.html">Final Project</a></li>
+                </ul>
+            </nav>
+        </div>
+    </br>
+</br>
+</br>
+</br>
+        <h1 style = "color:aliceblue">Week 8: Radio/Wifi/Bluetooth</h1>
+    </br>
+</br>
+</br>
+</br>
+
+
+<p>Week 8 started off a bit rough, I was unsure about what I wanted to do and eventually decided it would be best to work on something simple but cool so I could focus on my final</p>
+<p>I decided to make a LAN server which controlled an led light on my breadboard</p>
+<p>However, this simple project quickly became something that took up a bit too much of my time</p>
+<pre style = 'background-color:white;color:black'>
+    #include <WiFi.h>
+
+        const char* ssid     = "yourssid";
+        const char* password = "yourpasswd";
+        
+        WiFiServer server(80);
+        
+        void setup()
+        {
+            Serial.begin(115200);
+            pinMode(5, OUTPUT);      // set the LED pin mode
+        
+            delay(10);
+        
+            // We start by connecting to a WiFi network
+        
+            Serial.println();
+            Serial.println();
+            Serial.print("Connecting to ");
+            Serial.println(ssid);
+        
+            WiFi.begin(ssid, password);
+        
+            while (WiFi.status() != WL_CONNECTED) {
+                delay(500);
+                Serial.print(".");
+            }
+        
+            Serial.println("");
+            Serial.println("WiFi connected.");
+            Serial.println("IP address: ");
+            Serial.println(WiFi.localIP());
+            
+            server.begin();
+        
+        }
+        
+        int value = 0;
+        
+        void loop(){
+         WiFiClient client = server.available();   // listen for incoming clients
+        
+          if (client) {                             // if you get a client,
+            Serial.println("New Client.");           // print a message out the serial port
+            String currentLine = "";                // make a String to hold incoming data from the client
+            while (client.connected()) {            // loop while the client's connected
+              if (client.available()) {             // if there's bytes to read from the client,
+                char c = client.read();             // read a byte, then
+                Serial.write(c);                    // print it out the serial monitor
+                if (c == '\n') {                    // if the byte is a newline character
+        
+                  // if the current line is blank, you got two newline characters in a row.
+                  // that's the end of the client HTTP request, so send a response:
+                if (currentLine.length() == 0) {
+                    // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
+                    // and a content-type so the client knows what's coming, then a blank line:
+                    client.println("HTTP/1.1 200 OK");
+                    client.println("Content-type:text/html");
+                    client.println();
+        
+                    // the content of the HTTP response follows the header:
+                    client.print("Click <a href=\"/H\">here</a> to turn the LED on pin 5 on.<br>");
+                    client.print("Click <a href=\"/L\">here</a> to turn the LED on pin 5 off.<br>");
+        
+                    // The HTTP response ends with another blank line:
+                    client.println();
+                    // break out of the while loop:
+                    break;
+                  } else {    // if you got a newline, then clear currentLine:
+                    currentLine = "";
+                }
+                } else if (c != '\r') {  // if you got anything else but a carriage return character,
+                  currentLine += c;      // add it to the end of the currentLine
+                }
+        
+                // Check to see if the client request was "GET /H" or "GET /L":
+                if (currentLine.endsWith("GET /H")) {
+                  digitalWrite(5, HIGH);               // GET /H turns the LED on
+                }
+                if (currentLine.endsWith("GET /L")) {
+                  digitalWrite(5, LOW);                // GET /L turns the LED off
+                }
+            }
+            }
+            // close the connection:
+            client.stop();
+            Serial.println("Client Disconnected.");
+        }
+        }
+</pre>
+<p>Above is the SimpleWifi example code thats featured on Arduino</p>
+<p>I didnt think this would give me any issues, considering its example code and such</p>
+<p>However, this would cause me headache for the next 2 hours</p>
+<p>The specific issue was a client disconnect whenever I tried to click a button to turn on or off the LED</p>
+<img src = "./assets/img/debug.PNG" width = 50% height = 55% >
+<p>Google search after google search I wasnt finding any answers, the ESP32 board is extremely picky and can be complicated to use</p>
+<p>So, so you can avoid frustration here is a list of things that didnt fix this issue for me:</p>
+<p>1. Using a different ESP32</p>
+<p>2. Checking my wiring (will be shown later)</p>
+<p>3. Waiting until the wifi is connected before starting server</p>
+<p>4. Using a hotspot</p>
+<p>5. Ressetting ESP32 before, during, and after connection</p>
+<p>6. Changing wires</p>
+<p>7. Changing LED's</p>
+<p>8. Changing resistor type</p>
+<p>9. Changing breadboard's</p>
+<p>Even searching up the error on google came up with no results</p>
+<p>I did these in order, and when I reached the point of changing the breadboard I thought that it was impossible for it to be anything else</p>
+<p>I was wrong</p>
+<img src = "./assets/img/lights.png" width = 50% height = 50% >
+<p>This was my wiring, with the brand new breadboard I was using</p>
+<p>In this process I decided to change the code I was using</p>
+<pre style = 'background-color:white;color:black'>
+    #include <WiFi.h>
+
+        const char* ssid     = "yourssid";
+        const char* password = "yourpasswd";
+        
+        WiFiServer server(80);
+        
+        void setup()
+        {
+            Serial.begin(115200);
+            pinMode(5, OUTPUT);      // set the LED pin mode
+        
+            delay(10);
+        
+            // We start by connecting to a WiFi network
+        
+            Serial.println();
+            Serial.println();
+            Serial.print("Connecting to ");
+            Serial.println(ssid);
+        
+            WiFi.begin(ssid, password);
+        
+            while (WiFi.status() != WL_CONNECTED) {
+                delay(500);
+                Serial.print(".");
+            }
+        
+            Serial.println("");
+            Serial.println("WiFi connected.");
+            Serial.println("IP address: ");
+            Serial.println(WiFi.localIP());
+            
+            server.begin();
+        
+        }
+        
+        int value = 0;
+        
+        void loop(){
+         WiFiClient client = server.available();   // listen for incoming clients
+        
+          if (client) {                             // if you get a client,
+            Serial.println("New Client.");           // print a message out the serial port
+            String currentLine = "";                // make a String to hold incoming data from the client
+            while (client.connected()) {            // loop while the client's connected
+              if (client.available()) {             // if there's bytes to read from the client,
+                char c = client.read();             // read a byte, then
+                Serial.write(c);                    // print it out the serial monitor
+                if (c == '\n') {                    // if the byte is a newline character
+        
+                  // if the current line is blank, you got two newline characters in a row.
+                  // that's the end of the client HTTP request, so send a response:
+                if (currentLine.length() == 0) {
+                    // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
+                    // and a content-type so the client knows what's coming, then a blank line:
+                    client.println("HTTP/1.1 200 OK");
+                    client.println("Content-type:text/html");
+                    client.println();
+        
+                    // the content of the HTTP response follows the header:
+                    client.print("Click <a href=\"/H\">here</a> to turn the LED on pin 5 on.<br>");
+                    client.print("Click <a href=\"/L\">here</a> to turn the LED on pin 5 off.<br>");
+        
+                    // The HTTP response ends with another blank line:
+                    client.println();
+                    // break out of the while loop:
+                    break;
+                  } else {    // if you got a newline, then clear currentLine:
+                    currentLine = "";
+                }
+                } else if (c != '\r') {  // if you got anything else but a carriage return character,
+                  currentLine += c;      // add it to the end of the currentLine
+                }
+        
+                // Check to see if the client request was "GET /H" or "GET /L":
+                if (currentLine.endsWith("GET /H")) {
+                  digitalWrite(5, HIGH);               // GET /H turns the LED on
+                }
+                if (currentLine.endsWith("GET /L")) {
+                  digitalWrite(5, LOW);                // GET /L turns the LED off
+                }
+            }
+            }
+            // close the connection:
+            client.stop();
+            Serial.println("Client Disconnected.");
+        }
+        }
+</pre>
+<p>Notice how there's no resistor? Thats right, no matter the resistor I had, for some reason using it did not allow the light to come out, even at 5V</p>
+<p>Imagine how happy I was to have finally fixed my issue, with of course the frustration of the problem being so miniscule</p>
+<img src = "./assets/img/lights_2.png" width = 50% height = 50%>
+<p>Oh by the way, I ended up adding another light onto the breadboard, Il explain why now</p>
+<p>The new website featured a better design, one that let me control two different lights individually</p>
+<p>As a result, I decided why not have two lights instead of one?</p>
+<video width="50%" height="60%" autoplay muted>
+    <source src="assets/img/lights_working.mov" type="video/mp4"> </video>
+<p>So, this was this weeks project, definitely gave me a lot of frustration but in the end it was totally worth it</p>
+<p>Getting this done now lets me continue working on my final project which I couldnt be more excited to show</p>
+<p>So yeah thats all, big thank you again to randomnerdtutorials for the amazing guide which helped make this possible</p>
+
+        </div>
+    </div>
+</body>
+</html>
